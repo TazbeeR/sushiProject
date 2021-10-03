@@ -1,4 +1,4 @@
-package pl.coderslab.demo;
+package pl.coderslab.sushiProject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

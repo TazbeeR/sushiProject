@@ -1,4 +1,4 @@
-package pl.coderslab.demo;
+package pl.coderslab.sushiProject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
