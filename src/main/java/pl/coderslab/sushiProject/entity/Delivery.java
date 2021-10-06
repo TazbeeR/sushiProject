@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -30,7 +27,6 @@ public class Delivery {
     @NotEmpty
     private String type;
 
-    @DecimalMin("0.00")
-    @DecimalMax("200.00")
+    @Column(scale = 2, precision = 5)
     private BigDecimal price;
 }
