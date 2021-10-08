@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<h2>Dodanie nowej dostawy</h2>
+<h2>Dodanie nowego adresu</h2>
 
 <form:form method="post" modelAttribute="address">
     <form:hidden path="id"/>

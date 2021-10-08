@@ -1,5 +1,6 @@
 package pl.coderslab.sushiProject.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,13 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+
     private ProductService productService;
-    @Autowired
-    public ProductController(ProductService productService) {this.productService = productService;}
+
 
     @GetMapping("/list")
     public String getListOfProducts(Model model){

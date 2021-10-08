@@ -1,5 +1,6 @@
 package pl.coderslab.sushiProject.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +12,11 @@ import pl.coderslab.sushiProject.service.AddressService;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-
+@AllArgsConstructor
 @Controller
 @RequestMapping("/address")
 public class AddressController {
     private AddressService addressService;
-    @Autowired
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
 
     @GetMapping("/list")
     public String getListOfAddresses (Model model){
