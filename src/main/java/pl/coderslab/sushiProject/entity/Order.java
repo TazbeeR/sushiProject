@@ -32,7 +32,7 @@ public class Order {
 
     @NotNull
     @ManyToMany
-    private List<Product> productList = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @NotNull
     private String payment;

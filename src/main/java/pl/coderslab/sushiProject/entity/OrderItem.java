@@ -6,28 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.math.BigDecimal;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class OrderItem {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotEmpty
-    @Size(min=2)
-    private String name;
-    @NotEmpty
-    @Size(max = 400)
-    @Column(columnDefinition = "TEXT")
-    private String description;
-    @Column(scale = 2, precision = 5)
-    private BigDecimal price;
-
+    @NotNull
+    @Min(1)
+    private int quantity;
+    @OneToOne
+    private Product productId;
 }
