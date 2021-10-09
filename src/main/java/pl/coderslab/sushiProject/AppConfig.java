@@ -11,7 +11,7 @@ public class AppConfig {
 
 //    public Set<Converter> getConverters() {
 //        Set<Converter> converters = new HashSet<>();
-//        converters.add(new AuthorConverter());
+//        converters.add(new ProductConverter());
 //        return converters;
 //    }
 //
