@@ -7,11 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,21 +25,19 @@ public class Order {
     private long id;
 
     @NotNull
-    @ManyToOne
+    @OneToOne
     private User user;
 
     @NotNull
-    @ManyToOne
+    @OneToOne
     private Delivery delivery;
 
     @NotNull
-    @ManyToMany
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @ManyToOne
+    private OrderItem orderItem;
 
-    @NotNull
+    @NotEmpty
     private String payment;
 
-    @AssertFalse
-    private boolean isDone;
 
 }

@@ -11,9 +11,6 @@
     Description:
     <form:input  path="description"/>
     <form:errors path="description"/>
-    Ilość:
-    <form:input path="quantity"/>
-    <form:errors path="quantity"/>
     Price:
     <form:input  path="price"/>
     <form:errors path="price"/>

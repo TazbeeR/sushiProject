@@ -1,0 +1,39 @@
+.container1 .text1 h2 {
+  color: #9bad75;
+  font-family: "Montserrat", sans-serif;
+}
+
+.container1 .text1 h2 span {
+  color: #9bad75;
+  font-family: "Montserrat", sans-serif;
+}
+
+.container6 .caption h2 {
+  font-family: "GoodDog Cool";
+  color: #e5e5e5;
+}
+
+.container1 .text1 img {
+  width: 100%;
+}
+
+.container4 img {
+  width: 100%;
+}
+
+.container8 img {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .container1 header {
+    width: 50%;
+  }
+}
+
+@media (max-width: 992px) {
+  .container1 header .menu li {
+    min-width: 50%;
+  }
+}
+/*# sourceMappingURL=style1.css.map */

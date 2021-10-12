@@ -25,7 +25,7 @@ public class ProductController {
     public String getListOfProducts(Model model){
         List<Product> productList = productService.getProducts();
         model.addAttribute("products", productList);
-        return "/products/list";
+        return "/menu";
     }
 
     @GetMapping("/add")
@@ -71,4 +71,5 @@ public class ProductController {
         }
         return "redirect:/product/list";
     }
+
 }

@@ -1,0 +1,96 @@
+$item1: #9bad75;
+$item2: #e5e5e5;
+$item3: 'GoodDog Cool';
+$item4:  'Montserrat', sans-serif;;
+
+.container1 {
+    .text1 {
+        h2 {
+            color: $item1;
+            font-family: $item4;
+        }
+    }
+}
+.container1 {
+    .text1 {
+        h2 {
+            span {
+                color: $item1;
+                font-family: $item4;
+            }
+        }
+    }
+}
+.container6 {
+    .caption {
+        h2 {
+            font-family: $item3;
+            color: $item2;
+        }
+    }
+} 
+$img-width: 100%;
+
+@mixin sample {
+    width: $img-width;
+}
+
+.container1 {
+  .text1 {
+    img {
+      @include sample;
+    }
+  }
+}
+.container4 {
+    img {
+        @include sample;
+    } 
+}
+.container8 {
+    img {
+        @include sample;
+    } 
+}
+$menu: 80%;
+$value: 30%;
+
+@function width-menu() {
+    @return $menu - $value;
+}
+
+@media (max-width: 480px) {
+    .container1 {
+        header {
+            width: width-menu();
+        }
+    }
+}
+
+$menu2: 200px;
+$value2: 146px;
+
+@function width-menu-px() {
+    @return $menu - $value2;
+}
+
+
+$value3: 6px;
+$value4: 4px;
+
+@function size-px() {
+    @return $value3 + $value4;
+}
+
+@media (max-width: 992px) {
+    .container1 {
+        header {
+            .menu {
+                li {
+                    min-width: width-menu-px();
+                    padding-top: size-px();
+                }
+            }
+        }
+    }
+}

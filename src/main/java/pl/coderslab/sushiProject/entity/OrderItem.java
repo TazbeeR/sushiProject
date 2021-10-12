@@ -23,6 +23,7 @@ public class OrderItem {
     @NotNull
     @Min(1)
     private int quantity;
-    @OneToOne
-    private Product productId;
+    @ManyToOne
+    @NotNull
+    private Product product;
 }
