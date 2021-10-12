@@ -25,7 +25,7 @@ public class OrderItemController {
     public String getListOfOrderItems(Model model){
         List<OrderItem> orderItemList = orderItemService.getOrderItems();
         model.addAttribute("orderItems", orderItemList);
-        return "/orderItems/list";
+        return "basket";
     }
 
     @GetMapping("/add")

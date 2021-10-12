@@ -2,6 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp"%>
+<section class="container5">
+<%--    <h3>We like to keep things simple</h3>--%>
+<%--    <p>--%>
+<%--        Lorem ipsum dolor sit amet, consectetur--%>
+<%--        adipisicing elit, sed do eiusmod tempor--%>
+<%--        incididunt ut labore et dolore magna aliqua.--%>
+<%--        Ut enim ad minim veniam quis--%>
+<%--    </p>--%>
+<%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
+<%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
+<%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
+</section>
     <section class="container6">
     <img class="fon" src="../../img/bg3.png">
     <div class="center">
