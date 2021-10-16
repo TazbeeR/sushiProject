@@ -19,7 +19,7 @@
             <ul class="menu wow slideInDown" id="menu">
                 <li class="link1"><a href="/">start</a></li>
                 <li class="link2"><a href="/product/list">menu</a></li>
-                <li class="link3"><a href="/orderItem/list">koszyk</a></li>
+                <li class="link3"><a href="/orderItem/list">koszyk (${cartCount})</a></li>
                 <li class="link4"><a href="/contact">kontakt</a><br><br>
                     <a href="/login">login</a> </li>
             </ul>

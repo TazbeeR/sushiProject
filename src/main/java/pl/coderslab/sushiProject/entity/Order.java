@@ -33,8 +33,8 @@ public class Order {
     private Delivery delivery;
 
     @NotNull
-    @ManyToOne
-    private OrderItem orderItem;
+    @OneToMany
+    private List<OrderItem> orderItemList;
 
     @NotEmpty
     private String payment;

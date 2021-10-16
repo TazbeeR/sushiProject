@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp"%>
-<section class="container5">
+<%--<section class="container5">--%>
 <%--    <h3>We like to keep things simple</h3>--%>
 <%--    <p>--%>
 <%--        Lorem ipsum dolor sit amet, consectetur--%>
@@ -13,9 +13,9 @@
 <%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
 <%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
 <%--    <img class="wow bounce" data-wow-duration="2s" src="../../img/item2.png" alt="photo">--%>
-</section>
+<%--</section>--%>
     <section class="container6">
-    <img class="fon" src="../../img/bg3.png">
+<%--    <img class="fon" src="../../img/bg3.png">--%>
     <div class="center">
         <div class="content">
             <div class="caption">
@@ -24,7 +24,7 @@
             </div>
             <c:forEach items="${products}" var="product">
                 <div class="item">
-                    <img src="../../img/Object1.png" alt="photo">
+                    <a href="/orderItem/add/${product.id}" ><img src="../../img/Object1.png" alt="photo"></a>
                     <div class="text">
                         <h4>${product.name}</h4>
                         <p>${product.description}

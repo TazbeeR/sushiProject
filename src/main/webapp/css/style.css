@@ -127,10 +127,10 @@ q:after {
 	content: none;
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+/*table {*/
+/*	border-collapse: collapse;*/
+/*	border-spacing: 0;*/
+/*}*/
 
 /*END RESET.CSS*/
 body {
@@ -1060,4 +1060,5 @@ footer .content .text .item ul li a:hover {
 	.container4 img {
 		max-height: 270px;
 	}
+
 }
