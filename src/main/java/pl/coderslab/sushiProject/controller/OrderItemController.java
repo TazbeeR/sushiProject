@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @NoArgsConstructor
@@ -38,19 +39,23 @@ public class OrderItemController {
     @GetMapping("/add/{id}")
     public String initAddOrderItem(@PathVariable long id, HttpSession session) {
         Product product = productService.getProduct(id).orElseThrow(EntityNotFoundException::new);
-        OrderItem orderItem = new OrderItem(1, product);
+
         if (orderItems.size() == 0) {
+            OrderItem orderItem = new OrderItem(1, product);
             orderItems.add(orderItem);
-        } else {//problem z iteratorem 
-            for (Iterator<OrderItem> it = orderItems.iterator(); it.hasNext();) {
-                OrderItem item = it.next();
+        } else {
+            boolean ifExist = true;
+
+            for (OrderItem item : orderItems) {
                 if (item.getProduct().getId() == product.getId()) {
                     item.setQuantity(item.getQuantity() + 1);
-                } else {
-                    orderItems.add(orderItem);
+                    ifExist = false;
                 }
             }
-
+            if (ifExist) {
+                OrderItem orderItem = new OrderItem(1, product);
+                orderItems.add(orderItem);
+            }
         }
         cartCount = orderItems.size();
         session.setAttribute("orderItems", orderItems);
@@ -93,5 +98,4 @@ public class OrderItemController {
         }
         return total;
     }
-
 }
