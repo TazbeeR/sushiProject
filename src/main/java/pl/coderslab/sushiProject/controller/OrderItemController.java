@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @NoArgsConstructor
@@ -44,15 +43,15 @@ public class OrderItemController {
             OrderItem orderItem = new OrderItem(1, product);
             orderItems.add(orderItem);
         } else {
-            boolean ifExist = true;
+            boolean ifProductAlreadyExistInOrder = true;
 
             for (OrderItem item : orderItems) {
                 if (item.getProduct().getId() == product.getId()) {
                     item.setQuantity(item.getQuantity() + 1);
-                    ifExist = false;
+                    ifProductAlreadyExistInOrder = false;
                 }
             }
-            if (ifExist) {
+            if (ifProductAlreadyExistInOrder) {
                 OrderItem orderItem = new OrderItem(1, product);
                 orderItems.add(orderItem);
             }
