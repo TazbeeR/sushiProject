@@ -86,7 +86,15 @@ if (result.hasErrors()){
 
     @GetMapping("/details")
     public String detailsOfOrder(@RequestParam long id , Model model){
-        model.addAttribute("order", orderService.getOrder(id).orElseThrow(EntityNotFoundException::new));
+        String orderDontExist;
+        Order order = orderService.getOrder(id).orElseThrow(EntityNotFoundException::new);
+//ify do serwisu
+        if (order == null){
+            orderDontExist = "Nie ma takiego zamówienia";
+            model.addAttribute("exist", orderDontExist);
+            return "orders";
+        }
+        model.addAttribute("order", order);
         model.addAttribute("orderItems", orderItemService.selectItemOfOrder(id));
         return "details";
     }
