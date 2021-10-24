@@ -12,4 +12,7 @@ public interface OrderItemService {
     void addOrderItem (OrderItem orderItem);
     void removeOrderItem (long id);
     void updateOrderItem (OrderItem orderItem);
+    void saveAllOrderItems (List<OrderItem> orderItems);
+    void updateOrderId (long orderId, long itemId);
+    List<OrderItem> selectItemOfOrder(long orderId);
 }

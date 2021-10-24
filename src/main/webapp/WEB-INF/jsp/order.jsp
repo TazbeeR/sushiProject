@@ -1,7 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
+
 <style>
     .button {
         text-decoration: none;
@@ -41,6 +42,7 @@
         transform: skewX(-45deg) translateX(250px);
         transition: all 0.4s ease-in;
     }
+
     table.comicGreen {
         font-family: "Comic Sans MS", cursive, sans-serif;
         border: 2px solid #4F7849;
@@ -50,18 +52,22 @@
         text-align: center;
         border-collapse: collapse;
     }
+
     table.comicGreen td, table.comicGreen th {
         border: 1px solid #4F7849;
         padding: 3px 2px;
     }
+
     table.comicGreen tbody td {
         font-size: 50px;
         font-weight: bold;
         color: #4F7849;
     }
+
     table.comicGreen tr:nth-child(even) {
         background: #CEE0CC;
     }
+
     table.comicGreen thead {
         background: #4F7849;
         background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
@@ -69,6 +75,7 @@
         background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
         border-bottom: 1px solid #444444;
     }
+
     table.comicGreen thead th {
         font-size: 50px;
         font-weight: bold;
@@ -76,6 +83,7 @@
         text-align: center;
         border-left: 2px solid #D0E4F5;
     }
+
     table.comicGreen thead th:first-child {
         border-left: none;
     }
@@ -90,36 +98,55 @@
         background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
         border-top: 1px solid #444444;
     }
+
     table.comicGreen tfoot td {
         font-size: 50px;
     }
 </style>
 <table class="comicGreen">
-<thead>
-<th>Produkt</th><th>Ilość</th><th>Cena</th>
-</thead>
-<tfoot>
-<tr>
-    <td></td>
-    <td></td>
-    <td>${total}</td>
-</tr>
-</tfoot>
-<tbody>
-<c:forEach items="${orderItems}" var="item">
+    <thead>
+    <th>Produkt</th>
+    <th>Ilość</th>
+    <th>Cena</th>
+    </thead>
+    <tfoot>
     <tr>
-        <td>${item.product.name}</td>
-        <td>
-            <a href="/orderItem/minus/${item.product.name}">-</a>
-                ${item.quantity}
-            <a href="/orderItem/plus/${item.product.name}">+</a>
-        </td>
-        <td>${item.product.price}</td>
+        <td></td>
+        <td></td>
+        <td>${total}</td>
     </tr>
-</c:forEach>
-</tbody>
-</table><br /><br /><br />
-<center>
-    <a href="/order/order" class="button">Zamawiam</a>
-</center>
-<%@include file="footer.jsp"%>
+    </tfoot>
+    <tbody>
+    <c:forEach items="${orderItems}" var="item">
+        <tr>
+            <td>${item.product.name}</td>
+            <td>
+                    ${item.quantity}
+            </td>
+            <td>${item.product.price}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<br/><br/><br/>
+<form:form method="post" modelAttribute="order" cssStyle="color: #D0E4F5">
+
+    Dane do dostawy:
+    <form:select path="user.id" itemLabel="lastName" itemValue="id" items="${users}"/>
+    <a href="/user/add"> dodaj odbiorcę </a>
+    <br /><br />
+    Dostawa:
+    <form:select itemValue="id" itemLabel="type" path="delivery.id" items="${deliveries}"/><br /><br />
+    Płatność:
+    Gotówka:
+    <form:radiobutton path="payment" value="Gotówka"/>
+    Karta:
+    <form:radiobutton path="payment" value="Karta"/><br /><br />
+    <input type="submit" value="Zamawiam" class="button" />
+</form:form>
+
+<%--<center>--%>
+<%--    <a href="/order/order" class="button">Zamawiam</a>--%>
+<%--</center>--%>
+
+<%@include file="footer.jsp" %>

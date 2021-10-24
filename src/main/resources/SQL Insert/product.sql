@@ -1,0 +1,10 @@
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (1, 'węgorz pieczony, marynowane warzywa, mango', 'Unagi Futo', 36.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (2, 'krewetka gotowana, serek philadelpia, gruszka, mango, awokado', 'Fresh Roll', 38.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (3, 'łosoś, surimi, kanpyo, oshinko, ogórek, sezam', 'Classic Futo', 33.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (4, 'kalmar opiekany w tempurze, kampio, oshinko, sos majonezowy, por', ' Ika tempura', 36.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (5, ' łosoś, awokado, serek philadelphia, kanpyo, ogórek ', ' Philadelphia Sake', 33.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (6, ' łosoś, surimi, ogórek, kanpyo, oshinko, słonecznik ', ' California Dojo', 33.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (7, ' surimi, oshinko, ogórek, zawijane naprzemiennie w tuńczyka i rybę maślaną ', ' California Twist', 41.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (8, ' krewetka w tempurze, ogórek, oshinko, fukujinzuke, zawijane w omlet tamago, podawane z musem owocowym ', 'Gold Tamago ', 47.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (9, ' pikantny tatar z tuńczyka, sałata lodowa, cała rolka opiekana w tempurze ', ' Tatar z tuńczyka w tempurze', 45.00);
+INSERT INTO sushi_project.product (id, description, name, price) VALUES (10, ' mango, oshinko, kampio, sałata, serek, zawijane w pieczonego buraka ', 'Vege Geisha', 31.00);

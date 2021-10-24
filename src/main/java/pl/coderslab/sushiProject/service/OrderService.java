@@ -12,4 +12,5 @@ public interface OrderService {
     void addOrder (Order order);
     void removeOrder (long id);
     void updateOrder (Order order);
+    List<Order> findLast50Orders();
 }

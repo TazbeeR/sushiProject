@@ -39,4 +39,9 @@ public class JPAOrderService implements OrderService{
     public void updateOrder(Order order) {
         orderRepository.save(order);
     }
+
+    @Override
+    public List<Order> findLast50Orders() {
+      return orderRepository.findLast50Orders();
+    }
 }

@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.profile.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order {
 
     @Id
@@ -28,16 +29,22 @@ public class Order {
     @OneToOne
     private User user;
 
-    @NotNull
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Delivery delivery;
 
-    @NotNull
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private List<OrderItem> orderItemList;
 
-    @NotEmpty
+    @Column(scale = 2, precision = 5)
+    private BigDecimal finalPrice;
+
     private String payment;
 
-
+    public Order(User user, Delivery delivery, String payment) {
+        this.user = user;
+        this.delivery = delivery;
+        this.payment = payment;
+    }
 }

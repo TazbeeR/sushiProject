@@ -4,18 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.sushiProject.entity.OrderItem;
-import pl.coderslab.sushiProject.entity.Product;
-import pl.coderslab.sushiProject.service.OrderItemService;
-import pl.coderslab.sushiProject.service.ProductService;
+import pl.coderslab.sushiProject.entity.*;
+import pl.coderslab.sushiProject.service.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @NoArgsConstructor
@@ -24,16 +26,22 @@ import java.util.List;
 public class OrderItemController {
     @Autowired
     private ProductService productService;
-    private OrderItemService orderItemService;
+    @Autowired
+    private UserService userService;
     private List<OrderItem> orderItems = new ArrayList<>();
     private int cartCount;
+    private OrderService orderService;
+    private OrderItemService orderItemService;
+    private DeliveryService deliveryService;
 
     @GetMapping("/list")
-    public String getListOfOrderItems(HttpSession session) {
+    public String getListOfOrderItems(HttpSession session, Model model) {
 
         session.setAttribute("total", totalPrice());
         return "cart";
     }
+
+
 
     @GetMapping("/add/{id}")
     public String initAddOrderItem(@PathVariable long id, HttpSession session) {

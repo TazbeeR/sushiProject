@@ -39,4 +39,19 @@ public class JPAOrderItemService implements OrderItemService {
     public void updateOrderItem(OrderItem orderItem) {
         orderItemRepository.save(orderItem);
     }
+
+    @Override
+    public void saveAllOrderItems(List<OrderItem> orderItems) { orderItemRepository.saveAll(orderItems); }
+
+    @Override
+    public List<OrderItem> selectItemOfOrder(long orderId) {
+        return orderItemRepository.selectItemOfOrder(orderId);
+    }
+
+    @Override
+    public void updateOrderId(long orderId, long itemId) {
+        orderItemRepository.updateOrderId(orderId, itemId);
+
+
+    }
 }

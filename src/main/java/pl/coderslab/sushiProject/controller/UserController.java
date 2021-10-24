@@ -48,7 +48,7 @@ public class UserController {
             return "users/form";
         }
         userService.addUser(user);
-        return "redirect:/user/list";
+        return "redirect:/order/order";
     }
 
     @GetMapping("/update/{id}")

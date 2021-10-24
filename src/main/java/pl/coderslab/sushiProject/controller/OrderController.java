@@ -5,25 +5,86 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.sushiProject.entity.Delivery;
 import pl.coderslab.sushiProject.entity.Order;
+import pl.coderslab.sushiProject.entity.OrderItem;
+import pl.coderslab.sushiProject.entity.User;
+import pl.coderslab.sushiProject.service.DeliveryService;
+import pl.coderslab.sushiProject.service.OrderItemService;
 import pl.coderslab.sushiProject.service.OrderService;
+import pl.coderslab.sushiProject.service.UserService;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-
+    private UserService userService;
     private OrderService orderService;
+    private OrderItemService orderItemService;
+    private DeliveryService deliveryService;
+    @ModelAttribute("deliveries")
+    public List<Delivery> deliveries() {return deliveryService.getDeliveries();}
+    @ModelAttribute("users")
+    public List<User> users() {return userService.getUsers();}
+
+    @GetMapping("/order")
+    public String initOrder(Model model){
+
+        model.addAttribute("order", new Order());
+
+        return "order";
+    }
+
+    @PostMapping ("/order")
+    public String saveOrder(@Valid Order order, BindingResult result, HttpSession session, Model model){
+if (result.hasErrors()){
+    return "order";
+        }
+
+        Delivery delivery = deliveryService.getDelivery(order.getDelivery().getId()).orElseThrow(EntityNotFoundException::new);
+        BigDecimal deliveryPrice = delivery.getPrice();
+        BigDecimal totalPrice = new BigDecimal(String.valueOf(session.getAttribute("total")));
+        BigDecimal finalPrice = totalPrice.add(deliveryPrice);
+        order.setFinalPrice(finalPrice);
+        orderService.addOrder(order);
+        long orderId = order.getId();
+        List<OrderItem> orderItems = (List<OrderItem>) session.getAttribute("orderItems");
+        for (OrderItem item : orderItems) {
+            orderItemService.addOrderItem(item);
+            long itemId = item.getId();
+            orderItemService.updateOrderId(orderId, itemId);
+        }
+        long userId = order.getUser().getId();
+        long deliveryId = order.getDelivery().getId();
+
+        model.addAttribute("thisOrder", orderService.getOrder(orderId).orElseThrow(EmptyStackException::new));
+        model.addAttribute("thisUser", userService.getUser(userId).orElseThrow(EntityNotFoundException::new));
+        model.addAttribute("delivery", deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new));
+        model.addAttribute("finalPrice", (finalPrice));
+        return "addedOrder";
+    }
+
 
     @GetMapping("/list")
     public String getListOfOrders(Model model){
-        List<Order> orderList = orderService.getOrders();
+        List<Order> orderList = orderService.findLast50Orders();
         model.addAttribute("orders", orderList);
-        return "/orders/list";
+        return "orders";
+    }
+
+    @GetMapping("/details")
+    public String detailsOfOrder(@RequestParam long id , Model model){
+        model.addAttribute("order", orderService.getOrder(id).orElseThrow(EntityNotFoundException::new));
+        model.addAttribute("orderItems", orderItemService.selectItemOfOrder(id));
+        return "details";
     }
 
     @GetMapping("/add")
