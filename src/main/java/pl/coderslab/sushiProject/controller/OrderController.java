@@ -69,6 +69,10 @@ if (result.hasErrors()){
         model.addAttribute("thisUser", userService.getUser(userId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("delivery", deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("finalPrice", (finalPrice));
+        orderItems.clear();
+        int cartCount = orderItems.size();
+        session.setAttribute("orderItems", orderItems);
+        session.setAttribute("cartCount", cartCount);
         return "addedOrder";
     }
 
