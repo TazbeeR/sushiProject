@@ -69,7 +69,5 @@
 </footer>
 <script src="./JS/script.js"></script>
 <script src="./JS/wow.min.js"></script>
-<script>
-    new WOW().init();
-</script>
+<script> new WOW().init(); </script>
 </body>
