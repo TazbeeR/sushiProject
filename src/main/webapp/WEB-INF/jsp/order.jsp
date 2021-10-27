@@ -132,6 +132,31 @@
 <form:form method="post" modelAttribute="order" cssStyle="color: #D0E4F5">
 
     Dane do dostawy:
+<%--    Imię:--%>
+<%--    <form:input  path="user.firstName"/>--%>
+<%--    <form:errors path="user.firstName"/><br /><br />--%>
+<%--    Nazwisko:--%>
+<%--    <form:input  path="user.lastName"/>--%>
+<%--    <form:errors path="user.lastName"/><br /><br />--%>
+<%--    Numer telefonu:--%>
+<%--    <form:input path="user.phoneNumber"/>--%>
+<%--    <form:errors path="user.phoneNumber"/><br /><br />--%>
+<%--    Email:--%>
+<%--    <form:input path="user.email"/>--%>
+<%--    <form:errors path="user.email"/><br /><br />--%>
+<%--    Miasto:--%>
+<%--    <form:input  path="user.city"/>--%>
+<%--    <form:errors path="user.city"/><br /><br />--%>
+<%--    Kod pocztowy:--%>
+<%--    <form:input  path="user.postCode"/>--%>
+<%--    <form:errors path="user.postCode"/><br /><br />--%>
+<%--    Ulica:--%>
+<%--    <form:input path="user.street"/>--%>
+<%--    <form:errors path="user.street"/><br /><br />--%>
+<%--    Numer:--%>
+<%--    <form:input path="user.number"/>--%>
+<%--    <form:errors path="user.number"/><br /><br />--%>
+<%----%>
     <form:select path="user.id" itemLabel="lastName" itemValue="id" items="${users}"/>
     <a href="/user/add"> dodaj odbiorcę </a>
     <br /><br />

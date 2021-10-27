@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.sushiProject.entity.DTO.UserOrderDTO;
 import pl.coderslab.sushiProject.entity.Delivery;
 import pl.coderslab.sushiProject.entity.Order;
 import pl.coderslab.sushiProject.entity.OrderItem;
@@ -26,27 +27,37 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+
     private UserService userService;
     private OrderService orderService;
     private OrderItemService orderItemService;
     private DeliveryService deliveryService;
+
+
     @ModelAttribute("deliveries")
-    public List<Delivery> deliveries() {return deliveryService.getDeliveries();}
+    public List<Delivery> deliveries() {
+        return deliveryService.getDeliveries();
+    }
+
     @ModelAttribute("users")
-    public List<User> users() {return userService.getUsers();}
+    public List<User> users() {
+        return userService.getUsers();
+    }
+
 
     @GetMapping("/order")
-    public String initOrder(Model model){
-
+    public String initOrder(Model model) {
+        model.addAttribute("userOrderDTO", new UserOrderDTO());
         model.addAttribute("order", new Order());
-
         return "order";
     }
 
-    @PostMapping ("/order")
-    public String saveOrder(@Valid Order order, BindingResult result, HttpSession session, Model model){
-if (result.hasErrors()){
-    return "order";
+
+    @PostMapping("/order")
+    public String saveOrder(@Valid Order order, BindingResult result, HttpSession session, Model model) {
+
+        if (result.hasErrors()) {
+            return "order";
         }
 
         Delivery delivery = deliveryService.getDelivery(order.getDelivery().getId()).orElseThrow(EntityNotFoundException::new);
@@ -78,18 +89,18 @@ if (result.hasErrors()){
 
 
     @GetMapping("/list")
-    public String getListOfOrders(Model model){
+    public String getListOfOrders(Model model) {
         List<Order> orderList = orderService.findLast50Orders();
         model.addAttribute("orders", orderList);
         return "orders";
     }
 
     @GetMapping("/details")
-    public String detailsOfOrder(@RequestParam long id , Model model){
+    public String detailsOfOrder(@RequestParam long id, Model model) {
         String orderDontExist;
         Order order = orderService.getOrder(id).orElseThrow(EntityNotFoundException::new);
 //ify do serwisu
-        if (order == null){
+        if (order == null) {
             orderDontExist = "Nie ma takiego zamówienia";
             model.addAttribute("exist", orderDontExist);
             return "orders";
@@ -100,13 +111,14 @@ if (result.hasErrors()){
     }
 
     @GetMapping("/add")
-    public String initAddOrder(Model model){
+    public String initAddOrder(Model model) {
         model.addAttribute("order", new Order());
         return "/orders/form";
     }
+
     @PostMapping("/add")
-    public String addOrder(@Valid Order order, BindingResult result){
-        if (result.hasErrors()){
+    public String addOrder(@Valid Order order, BindingResult result) {
+        if (result.hasErrors()) {
             return "/orders/form";
         }
         orderService.addOrder(order);
@@ -114,13 +126,14 @@ if (result.hasErrors()){
     }
 
     @GetMapping("/update/{id}")
-    public String initUpdateOrder(@PathVariable long id, Model model){
+    public String initUpdateOrder(@PathVariable long id, Model model) {
         model.addAttribute("order", orderService.getOrder(id));
         return "orders/form";
     }
+
     @PostMapping("/update/{id}")
-    public String updateOrder(@Valid Order order, BindingResult result){
-        if (result.hasErrors()){
+    public String updateOrder(@Valid Order order, BindingResult result) {
+        if (result.hasErrors()) {
             return "orders/form";
         }
         orderService.updateOrder(order);
@@ -128,14 +141,15 @@ if (result.hasErrors()){
     }
 
     @GetMapping("/delete/{id}")
-    public String initDeleteOrder(@PathVariable long id, Model model){
+    public String initDeleteOrder(@PathVariable long id, Model model) {
         Order order = orderService.getOrder(id).orElseThrow(EntityNotFoundException::new);
         model.addAttribute("order", order);
         return "orders/delete";
     }
+
     @PostMapping("/delete/{id}")
-    public String deleteOrder(@RequestParam String confirmed, @RequestParam long id){
-        if ("yes".equals(confirmed)){
+    public String deleteOrder(@RequestParam String confirmed, @RequestParam long id) {
+        if ("yes".equals(confirmed)) {
             orderService.removeOrder(id);
         }
         return "redirect:/orders/list";
