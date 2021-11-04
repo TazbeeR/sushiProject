@@ -1,16 +1,10 @@
 package pl.coderslab.sushiProject.entity.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 import pl.coderslab.sushiProject.entity.Delivery;
-import pl.coderslab.sushiProject.entity.OrderItem;
 
 import javax.validation.constraints.*;
-import java.math.BigDecimal;
-import java.util.List;
 
 @Component
 @Getter
@@ -52,10 +46,12 @@ public class UserOrderDTO {
 
     @NotNull
     private Delivery delivery;
-    @NotNull
-    private List<OrderItem> orderItemList;
-    @NotNull
-    private BigDecimal finalPrice;
+//    @NotNull
+//    private List<OrderItem> orderItemList;
+//    @NotNull
+//    private BigDecimal finalPrice;
     @NotBlank
     private String payment;
+
+
 }

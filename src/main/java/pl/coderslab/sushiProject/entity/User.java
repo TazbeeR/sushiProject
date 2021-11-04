@@ -49,4 +49,15 @@ public class User {
     @NotBlank
     @Email
     private String email;
+
+    public User(String firstName, String lastName, String city, String postCode, String street, String number, int phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.postCode = postCode;
+        this.street = street;
+        this.number = number;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }

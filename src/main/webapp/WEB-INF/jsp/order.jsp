@@ -129,36 +129,37 @@
     </tbody>
 </table>
 <br/><br/><br/>
-<form:form method="post" modelAttribute="order" cssStyle="color: #D0E4F5">
+<form:form method="post" modelAttribute="userOrderDTO" cssStyle="color: #D0E4F5">
 
-    Dane do dostawy:
-<%--    Imię:--%>
-<%--    <form:input  path="user.firstName"/>--%>
-<%--    <form:errors path="user.firstName"/><br /><br />--%>
-<%--    Nazwisko:--%>
-<%--    <form:input  path="user.lastName"/>--%>
-<%--    <form:errors path="user.lastName"/><br /><br />--%>
-<%--    Numer telefonu:--%>
-<%--    <form:input path="user.phoneNumber"/>--%>
-<%--    <form:errors path="user.phoneNumber"/><br /><br />--%>
-<%--    Email:--%>
-<%--    <form:input path="user.email"/>--%>
-<%--    <form:errors path="user.email"/><br /><br />--%>
-<%--    Miasto:--%>
-<%--    <form:input  path="user.city"/>--%>
-<%--    <form:errors path="user.city"/><br /><br />--%>
-<%--    Kod pocztowy:--%>
-<%--    <form:input  path="user.postCode"/>--%>
-<%--    <form:errors path="user.postCode"/><br /><br />--%>
-<%--    Ulica:--%>
-<%--    <form:input path="user.street"/>--%>
-<%--    <form:errors path="user.street"/><br /><br />--%>
-<%--    Numer:--%>
-<%--    <form:input path="user.number"/>--%>
-<%--    <form:errors path="user.number"/><br /><br />--%>
-<%----%>
-    <form:select path="user.id" itemLabel="lastName" itemValue="id" items="${users}"/>
-    <a href="/user/add"> dodaj odbiorcę </a>
+    Dane do dostawy:<br />
+    Imię:
+    <form:input path="firstName"/>
+    <form:errors path="firstName"/><br /><br />
+    Nazwisko:
+    <form:input  path="lastName"/>
+    <form:errors path="lastName"/><br /><br />
+
+    Miasto:
+    <form:input  path="city"/>
+    <form:errors path="city"/><br /><br />
+    Kod pocztowy:
+    <form:input  path="postCode"/>
+    <form:errors path="postCode"/><br /><br />
+    Ulica:
+    <form:input path="street"/>
+    <form:errors path="street"/><br /><br />
+    Numer:
+    <form:input path="number"/>
+    <form:errors path="number"/><br /><br />
+    Numer telefonu:
+    <form:input path="phoneNumber"/>
+    <form:errors path="phoneNumber"/><br /><br />
+    Email:
+    <form:input path="email"/>
+    <form:errors path="email"/><br /><br />
+
+<%--    <form:select path="user.id" itemLabel="lastName" itemValue="id" items="${users}"/>--%>
+<%--    <a href="/user/add"> dodaj odbiorcę </a>--%>
     <br /><br />
     Dostawa:
     <form:select itemValue="id" itemLabel="type" path="delivery.id" items="${deliveries}"/><br /><br />

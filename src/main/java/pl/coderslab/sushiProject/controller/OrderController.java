@@ -32,7 +32,7 @@ public class OrderController {
     private OrderService orderService;
     private OrderItemService orderItemService;
     private DeliveryService deliveryService;
-
+    private UserOrderDTO userOrderDTO;
 
     @ModelAttribute("deliveries")
     public List<Delivery> deliveries() {
@@ -48,22 +48,45 @@ public class OrderController {
     @GetMapping("/order")
     public String initOrder(Model model) {
         model.addAttribute("userOrderDTO", new UserOrderDTO());
-        model.addAttribute("order", new Order());
+     //        model.addAttribute("order", new Order());
         return "order";
     }
 
 
     @PostMapping("/order")
-    public String saveOrder(@Valid Order order, BindingResult result, HttpSession session, Model model) {
-
+    public String saveOrder(HttpSession session, Model model, @Valid UserOrderDTO userOrderDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "order";
         }
 
-        Delivery delivery = deliveryService.getDelivery(order.getDelivery().getId()).orElseThrow(EntityNotFoundException::new);
+        userOrderDTO = (UserOrderDTO) model.getAttribute("userOrderDTO");
+        User user = new User(userOrderDTO.getFirstName(), userOrderDTO.getLastName(),
+                             userOrderDTO.getCity(), userOrderDTO.getPostCode(),
+                             userOrderDTO.getStreet(), userOrderDTO.getNumber(),
+                             userOrderDTO.getPhoneNumber(), userOrderDTO.getEmail());
+
+
+//        List<User> users = userService.getUsers();
+        long userId = 0;
+//        for (User item : users) {
+//            if (user.equals(item)){
+//             userId = item.getId();
+//            }else{
+                userService.addUser(user);
+                userId= user.getId();
+//            }
+//        }
+        long deliveryId = userOrderDTO.getDelivery().getId();
+        String payment = userOrderDTO.getPayment();
+        Delivery delivery = deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new);
+
+//        Delivery delivery = deliveryService.getDelivery(order.getDelivery().getId()).orElseThrow(EntityNotFoundException::new);
+
         BigDecimal deliveryPrice = delivery.getPrice();
         BigDecimal totalPrice = new BigDecimal(String.valueOf(session.getAttribute("total")));
         BigDecimal finalPrice = totalPrice.add(deliveryPrice);
+
+    Order order = new Order(user, delivery , payment);
         order.setFinalPrice(finalPrice);
         orderService.addOrder(order);
         long orderId = order.getId();
@@ -73,9 +96,9 @@ public class OrderController {
             long itemId = item.getId();
             orderItemService.updateOrderId(orderId, itemId);
         }
-        long userId = order.getUser().getId();
-        long deliveryId = order.getDelivery().getId();
-
+//        long userId = order.getUser().getId();
+//        long deliveryId = order.getDelivery().getId();
+//
         model.addAttribute("thisOrder", orderService.getOrder(orderId).orElseThrow(EmptyStackException::new));
         model.addAttribute("thisUser", userService.getUser(userId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("delivery", deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new));
