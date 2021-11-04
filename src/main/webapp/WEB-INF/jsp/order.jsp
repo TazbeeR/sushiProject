@@ -128,51 +128,68 @@
     </c:forEach>
     </tbody>
 </table>
-<br/><br/><br/>
-<form:form method="post" modelAttribute="userOrderDTO" cssStyle="color: #D0E4F5">
-
-    Dane do dostawy:<br />
-    Imię:
-    <form:input path="firstName"/>
-    <form:errors path="firstName"/><br /><br />
-    Nazwisko:
-    <form:input  path="lastName"/>
-    <form:errors path="lastName"/><br /><br />
-
-    Miasto:
-    <form:input  path="city"/>
-    <form:errors path="city"/><br /><br />
-    Kod pocztowy:
-    <form:input  path="postCode"/>
-    <form:errors path="postCode"/><br /><br />
-    Ulica:
-    <form:input path="street"/>
-    <form:errors path="street"/><br /><br />
-    Numer:
-    <form:input path="number"/>
-    <form:errors path="number"/><br /><br />
-    Numer telefonu:
-    <form:input path="phoneNumber"/>
-    <form:errors path="phoneNumber"/><br /><br />
-    Email:
-    <form:input path="email"/>
-    <form:errors path="email"/><br /><br />
-
-<%--    <form:select path="user.id" itemLabel="lastName" itemValue="id" items="${users}"/>--%>
-<%--    <a href="/user/add"> dodaj odbiorcę </a>--%>
-    <br /><br />
-    Dostawa:
-    <form:select itemValue="id" itemLabel="type" path="delivery.id" items="${deliveries}"/><br /><br />
-    Płatność:
-    Gotówka:
-    <form:radiobutton path="payment" value="Gotówka"/>
-    Karta:
-    <form:radiobutton path="payment" value="Karta"/><br /><br />
-    <input type="submit" value="Zamawiam" class="button" />
-</form:form>
-
-<%--<center>--%>
-<%--    <a href="/order/order" class="button">Zamawiam</a>--%>
-<%--</center>--%>
-
+<br/><br/><br/><section class="container7">
+    <form:form method="post" modelAttribute="userOrderDTO">
+        <div class="caption">
+            <h2>Dane do zamówienia</h2>
+        </div>
+        <div class="block1">
+            <div class="text">
+                <p>Imię</p>
+                <form:input path="firstName" placeholder="Imię"/>
+                <form:errors path="firstName"/>
+            </div>
+            <div class="text">
+                <p>Nazwisko</p>
+                <form:input  path="lastName" placeholder="Nazwisko"/>
+                <form:errors path="lastName"/>
+            </div>
+            <div class="text">
+                <p>Telefon</p>
+                <form:input path="phoneNumber" placeholder="555555555"/>
+                <form:errors path="phoneNumber"/>
+            </div>
+        </div>
+        <div class="block2">
+            <div class="text">
+                <p>Miasto</p>
+                <form:input  path="city" placeholder="Miasto"/>
+                <form:errors path="city"/>
+            </div>
+            <div class="text">
+                <p>Kod pocztowy</p>
+                <form:input  path="postCode" placeholder="11-111"/>
+                <form:errors path="postCode"/>
+            </div>
+            <div class="text">
+                <p>Ulica</p>
+                <form:input path="street" placeholder="Ulica"/>
+                <form:errors path="street"/>
+            </div>
+            <div class="text">
+                <p>Numer</p>
+                <form:input path="number" placeholder="Nr domu/mieszkania"/>
+                <form:errors path="number"/>
+            </div>
+        </div>
+        <div class="block3">
+            <div class="text">
+                <p>Email</p>
+                <form:input path="email" placeholder="Tutaj wpisz swój email"/>
+                <form:errors path="email"/>
+            </div>
+            <div class="select">
+                <p>Dostawa</p>
+                <form:select itemValue="id" itemLabel="type" path="delivery.id" items="${deliveries}"/>
+            </div>
+            <div class="select">
+                <p>Płatność</p>
+                <form:select path="payment" items="${pay}"/>
+            </div>
+        </div>
+        <div class="submit">
+            <input type="submit" id="submit" value="Zamawiam" />
+        </div>
+    </form:form>
+</section>
 <%@include file="footer.jsp" %>

@@ -19,9 +19,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -32,7 +32,6 @@ public class OrderController {
     private OrderService orderService;
     private OrderItemService orderItemService;
     private DeliveryService deliveryService;
-    private UserOrderDTO userOrderDTO;
 
     @ModelAttribute("deliveries")
     public List<Delivery> deliveries() {
@@ -44,14 +43,19 @@ public class OrderController {
         return userService.getUsers();
     }
 
+    @ModelAttribute("pay")
+    public List<String> pay() {return Arrays.asList(
+            "Gotówka",
+            "Karta"
+    );
+    }
+
 
     @GetMapping("/order")
     public String initOrder(Model model) {
         model.addAttribute("userOrderDTO", new UserOrderDTO());
-     //        model.addAttribute("order", new Order());
         return "order";
     }
-
 
     @PostMapping("/order")
     public String saveOrder(HttpSession session, Model model, @Valid UserOrderDTO userOrderDTO, BindingResult result) {
@@ -65,22 +69,12 @@ public class OrderController {
                              userOrderDTO.getStreet(), userOrderDTO.getNumber(),
                              userOrderDTO.getPhoneNumber(), userOrderDTO.getEmail());
 
-
-//        List<User> users = userService.getUsers();
         long userId = 0;
-//        for (User item : users) {
-//            if (user.equals(item)){
-//             userId = item.getId();
-//            }else{
                 userService.addUser(user);
                 userId= user.getId();
-//            }
-//        }
         long deliveryId = userOrderDTO.getDelivery().getId();
         String payment = userOrderDTO.getPayment();
         Delivery delivery = deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new);
-
-//        Delivery delivery = deliveryService.getDelivery(order.getDelivery().getId()).orElseThrow(EntityNotFoundException::new);
 
         BigDecimal deliveryPrice = delivery.getPrice();
         BigDecimal totalPrice = new BigDecimal(String.valueOf(session.getAttribute("total")));
@@ -96,9 +90,6 @@ public class OrderController {
             long itemId = item.getId();
             orderItemService.updateOrderId(orderId, itemId);
         }
-//        long userId = order.getUser().getId();
-//        long deliveryId = order.getDelivery().getId();
-//
         model.addAttribute("thisOrder", orderService.getOrder(orderId).orElseThrow(EmptyStackException::new));
         model.addAttribute("thisUser", userService.getUser(userId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("delivery", deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new));
@@ -109,7 +100,6 @@ public class OrderController {
         session.setAttribute("cartCount", cartCount);
         return "addedOrder";
     }
-
 
     @GetMapping("/list")
     public String getListOfOrders(Model model) {
