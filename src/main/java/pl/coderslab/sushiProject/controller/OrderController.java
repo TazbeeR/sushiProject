@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -90,7 +91,7 @@ public class OrderController {
             long itemId = item.getId();
             orderItemService.updateOrderId(orderId, itemId);
         }
-        model.addAttribute("thisOrder", orderService.getOrder(orderId).orElseThrow(EmptyStackException::new));
+        model.addAttribute("thisOrder", orderService.getOrder(orderId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("thisUser", userService.getUser(userId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("delivery", deliveryService.getDelivery(deliveryId).orElseThrow(EntityNotFoundException::new));
         model.addAttribute("finalPrice", (finalPrice));
@@ -111,14 +112,16 @@ public class OrderController {
     @GetMapping("/details")
     public String detailsOfOrder(@RequestParam long id, Model model) {
         String orderDontExist;
-        Order order = orderService.getOrder(id).orElseThrow(EntityNotFoundException::new);
-//ify do serwisu
-        if (order == null) {
-            orderDontExist = "Nie ma takiego zamówienia";
+            Optional<Order> order = orderService.getOrder(id);
+        System.out.println(order);
+        if (!order.isPresent()){
+                    orderDontExist = "Nie ma takiego zamówienia";
             model.addAttribute("exist", orderDontExist);
+            List<Order> orderList = orderService.findLast50Orders();
+            model.addAttribute("orders", orderList);
             return "orders";
         }
-        model.addAttribute("order", order);
+        model.addAttribute("order", order.orElseThrow(EntityNotFoundException::new));
         model.addAttribute("orderItems", orderItemService.selectItemOfOrder(id));
         return "details";
     }

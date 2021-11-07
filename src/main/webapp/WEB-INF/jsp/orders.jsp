@@ -67,9 +67,9 @@
     <center>
         <form method="get" action="/order/details" >
             <div style="color: #4F7849; font-size: 20px">znajdź zamówienie nr: <input type="number" name="id" value="${order.id}"/>
-            <input type="submit"></div>
-        </form>
-        <div style="color: #4F7849; font-size: 20px"> ${exist} </div>
+            <input type="submit" value="znajdź"></div>
+        </form><br />
+        <div style="color: red; font-size: 20px"> ${exist} </div>
     </center>
     <br/><br/>
 
